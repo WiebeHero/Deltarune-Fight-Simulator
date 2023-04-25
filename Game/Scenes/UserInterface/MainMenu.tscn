@@ -1,0 +1,256 @@
+[gd_scene load_steps=20 format=3 uid="uid://djcj51yu2fmin"]
+
+[ext_resource type="Texture2D" uid="uid://byp82tc1xuqdr" path="res://Assets/Sprites/UserInterface/ActIcon.png" id="1_rnsae"]
+[ext_resource type="Script" path="res://Scripts/Kris/PlayerMenu.gd" id="1_wrvj3"]
+[ext_resource type="Texture2D" uid="uid://3hnqulxv0yxg" path="res://Assets/Sprites/UserInterface/FightIcon.png" id="2_aamiy"]
+[ext_resource type="Texture2D" uid="uid://b7l0rletn8aqb" path="res://Assets/Sprites/UserInterface/BagIcon.png" id="3_uvpxu"]
+[ext_resource type="FontFile" uid="uid://c1kiewqocm0nq" path="res://Assets/Fonts/deltarune.ttf" id="3_wygf8"]
+[ext_resource type="Texture2D" uid="uid://c4hpw5i31qb0v" path="res://Assets/Sprites/UserInterface/DefendIcon.png" id="4_4byme"]
+[ext_resource type="Texture2D" uid="uid://brg2pems3lk7j" path="res://Assets/Sprites/UserInterface/ActIconActive.png" id="5_c15by"]
+[ext_resource type="Texture2D" uid="uid://8y7k3r2d651y" path="res://Assets/Sprites/UserInterface/MagicIcon.png" id="5_qj181"]
+[ext_resource type="Texture2D" uid="uid://b3u5e31cnlns3" path="res://Assets/Sprites/UserInterface/SpareIcon.png" id="6_3tr1m"]
+[ext_resource type="Texture2D" uid="uid://cnypeveb4sps" path="res://Assets/Sprites/UserInterface/KrissInterface.png" id="7_nmg0t"]
+[ext_resource type="Texture2D" uid="uid://c7bx3lby8k05d" path="res://Assets/Sprites/UserInterface/FightIconActive.png" id="7_pgesf"]
+[ext_resource type="Texture2D" uid="uid://dut3tkhanywve" path="res://Assets/Sprites/UserInterface/KrissInterfaceNotActive.png" id="8_s2025"]
+[ext_resource type="Texture2D" uid="uid://cy4w0y14lnojm" path="res://Assets/Sprites/UserInterface/BagIconActive.png" id="9_a5gfl"]
+[ext_resource type="Texture2D" uid="uid://dxp86uvf7hmri" path="res://Assets/Sprites/UserInterface/DefendIconActive.png" id="11_61yq1"]
+[ext_resource type="Texture2D" uid="uid://gketwlyal458" path="res://Assets/Sprites/UserInterface/MagicIconActive.png" id="13_ahi6m"]
+[ext_resource type="Texture2D" uid="uid://lx21rvnujnvu" path="res://Assets/Sprites/UserInterface/SpareIconActive.png" id="15_ib6q2"]
+
+[sub_resource type="Animation" id="Animation_eun4v"]
+resource_name = "Activity"
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("KrissInterface:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("KrissInterfaceNotActive:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("KrissInterface:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.166667, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(22, 278), Vector2(22, -28)]
+}
+
+[sub_resource type="Animation" id="Animation_r0eky"]
+resource_name = "ActivityChanged"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a8qas"]
+_data = {
+"Activity": SubResource("Animation_eun4v"),
+"ActivityChanged": SubResource("Animation_r0eky")
+}
+
+[node name="Node2D" type="Node2D"]
+position = Vector2(1, 0)
+script = ExtResource("1_wrvj3")
+buttonParentPath = NodePath("TotalMenu/Buttons/FightButton")
+animatorPath = NodePath("TotalMenu/AnimationPlayer")
+timerPath = NodePath("TotalMenu/Timer")
+_hpBarPath = Array[NodePath]([NodePath("TotalMenu/KrissInterface/ColorRect"), NodePath("TotalMenu/KrissInterfaceNotActive/ColorRect")])
+_healthTextPath = Array[NodePath]([NodePath("TotalMenu/KrissInterface/HP"), NodePath("TotalMenu/KrissInterfaceNotActive/HP")])
+_maxHealthTextPath = Array[NodePath]([NodePath("TotalMenu/KrissInterface/MAXHP"), NodePath("TotalMenu/KrissInterfaceNotActive/MAXHP")])
+
+[node name="TotalMenu" type="Node2D" parent="."]
+
+[node name="KrissInterface" type="Sprite2D" parent="TotalMenu"]
+visible = false
+position = Vector2(22, 278)
+texture = ExtResource("7_nmg0t")
+
+[node name="HP" type="Label" parent="TotalMenu/KrissInterface"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 283.0
+offset_top = -600.0
+offset_right = 454.0
+offset_bottom = -460.0
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_wygf8")
+theme_override_font_sizes/font_size = 175
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MAXHP" type="Label" parent="TotalMenu/KrissInterface"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 761.0
+offset_top = -600.0
+offset_right = 932.0
+offset_bottom = -460.0
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_wygf8")
+theme_override_font_sizes/font_size = 175
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="TotalMenu/KrissInterface"]
+offset_left = 215.0
+offset_top = -120.0
+offset_right = 975.0
+offset_bottom = -30.0
+color = Color(0, 0.8, 0.886275, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TotalMenu"]
+speed_scale = 1.5
+libraries = {
+"": SubResource("AnimationLibrary_a8qas")
+}
+
+[node name="KrissInterfaceNotActive" type="Sprite2D" parent="TotalMenu"]
+visible = false
+position = Vector2(22, 132)
+texture = ExtResource("8_s2025")
+
+[node name="HP" type="Label" parent="TotalMenu/KrissInterfaceNotActive"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 283.0
+offset_top = -302.0
+offset_right = 454.0
+offset_bottom = -162.0
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_wygf8")
+theme_override_font_sizes/font_size = 175
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MAXHP" type="Label" parent="TotalMenu/KrissInterfaceNotActive"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 761.0
+offset_top = -302.0
+offset_right = 932.0
+offset_bottom = -162.0
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_wygf8")
+theme_override_font_sizes/font_size = 175
+text = "0
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="TotalMenu/KrissInterfaceNotActive"]
+offset_left = 210.0
+offset_top = 20.0
+offset_right = 970.0
+offset_bottom = 110.0
+color = Color(0, 0.8, 0.886275, 1)
+
+[node name="Buttons" type="Node2D" parent="TotalMenu"]
+z_index = -1
+position = Vector2(0, 40)
+scale = Vector2(0.8, 0.8)
+
+[node name="ActButton" type="TextureButton" parent="TotalMenu/Buttons"]
+texture_filter = 1
+offset_left = -771.25
+offset_top = 1.25
+offset_right = -461.25
+offset_bottom = 261.25
+texture_normal = ExtResource("1_rnsae")
+texture_hover = ExtResource("5_c15by")
+
+[node name="FightButton" type="TextureButton" parent="TotalMenu/Buttons"]
+offset_left = -1181.25
+offset_top = 1.25
+offset_right = -871.25
+offset_bottom = 261.25
+texture_normal = ExtResource("2_aamiy")
+texture_hover = ExtResource("7_pgesf")
+
+[node name="ItemButton" type="TextureButton" parent="TotalMenu/Buttons"]
+offset_left = -361.25
+offset_top = 1.25
+offset_right = -51.25
+offset_bottom = 261.25
+texture_normal = ExtResource("3_uvpxu")
+texture_hover = ExtResource("9_a5gfl")
+
+[node name="DefendButton" type="TextureButton" parent="TotalMenu/Buttons"]
+offset_left = 48.75
+offset_right = 358.75
+offset_bottom = 260.0
+texture_normal = ExtResource("4_4byme")
+texture_hover = ExtResource("11_61yq1")
+
+[node name="MagicButton" type="TextureButton" parent="TotalMenu/Buttons"]
+offset_left = 458.75
+offset_top = 1.0
+offset_right = 768.75
+offset_bottom = 261.0
+texture_normal = ExtResource("5_qj181")
+texture_hover = ExtResource("13_ahi6m")
+
+[node name="SpareButton" type="TextureButton" parent="TotalMenu/Buttons"]
+offset_left = 878.75
+offset_top = 1.0
+offset_right = 1188.75
+offset_bottom = 261.0
+texture_normal = ExtResource("6_3tr1m")
+texture_hover = ExtResource("15_ib6q2")
+
+[node name="Timer" type="Timer" parent="TotalMenu"]
+wait_time = 0.05
+
+[node name="DialogueBox" type="ColorRect" parent="TotalMenu"]
+offset_left = -2845.0
+offset_top = 322.0
+offset_right = 2915.0
+offset_bottom = 873.0
+color = Color(0, 0, 0, 1)
+
+[node name="LineUITop" type="Line2D" parent="."]
+z_index = -2
+position = Vector2(0, -50)
+points = PackedVector2Array(-3000, 0, 3000, 0)
+width = 15.0
+default_color = Color(0.164706, 0.145098, 0.192157, 1)
+
+[node name="LineUIBottom" type="Line2D" parent="."]
+position = Vector2(0, 315)
+points = PackedVector2Array(-3000, 0, 3000, 0)
+width = 15.0
+default_color = Color(0.164706, 0.145098, 0.192157, 1)
+
+[connection signal="mouse_entered" from="TotalMenu/Buttons/ActButton" to="." method="_on_button_hovered"]
+[connection signal="button_down" from="TotalMenu/Buttons/FightButton" to="." method="_on_fight_button_button_down"]
+[connection signal="mouse_entered" from="TotalMenu/Buttons/FightButton" to="." method="_on_button_hovered"]
+[connection signal="timeout" from="TotalMenu/Timer" to="." method="_on_health_timeout"]

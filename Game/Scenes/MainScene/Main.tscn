@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://j0aebqd2sfmc"]
+
+[ext_resource type="PackedScene" uid="uid://djcj51yu2fmin" path="res://Scenes/UserInterface/MainMenu.tscn" id="1_x1b6p"]
+[ext_resource type="PackedScene" uid="uid://bgto1jrgy1dgs" path="res://Scenes/Character/Kris.tscn" id="2_3qthw"]
+[ext_resource type="PackedScene" uid="uid://blv0ctsi50u4p" path="res://Scenes/Character/Chara.tscn" id="3_dd2b8"]
+
+[node name="Main" type="Node2D"]
+position = Vector2(452, 409)
+scale = Vector2(0.2, 0.2)
+
+[node name="Node2D" parent="." instance=ExtResource("1_x1b6p")]
+position = Vector2(585, 322)
+krisPath = NodePath("../Kris")
+
+[node name="Kris" parent="." instance=ExtResource("2_3qthw")]
+position = Vector2(-1415, -795)
+gravity_scale = 0.0
+_attack = 2
+
+[node name="Chara" parent="." instance=ExtResource("3_dd2b8")]
+position = Vector2(2675, -795)
+
+[connection signal="requestFightAction" from="Node2D" to="Kris" method="_on_request_fight_action"]
+[connection signal="attacking" from="Kris" to="Chara" method="_on_kris_attacking"]
+[connection signal="damaged" from="Kris" to="Node2D" method="_on_kriss_damaged"]
+[connection signal="player_ready" from="Kris" to="Node2D" method="_on_kriss_player_ready"]
